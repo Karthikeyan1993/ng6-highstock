@@ -76,9 +76,6 @@ export class StockChartContainerComponent implements OnInit {
           ]
         },
         threshold: null,
-        dataGrouping: {
-          enabled: false
-        }
       }]
     };
   }
