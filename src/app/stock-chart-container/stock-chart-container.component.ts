@@ -83,62 +83,27 @@ export class StockChartContainerComponent implements OnInit {
     };
   }
 
-  getPeriodData = (period, json: any[]) => {
-    let _dummy = [];
-    if (period === '1h') {
-      const _max = json[json.length - 1][0];
-      const _min = _max - (3600 * 1000);
-      let _minIndex = -1;
-      const _lastIndex = json.length - 1;
-      for (let index = 0; index < json.length; index++) {
-        const element = json[index];
-        if (element[0] >= _min) {
-          _minIndex = index;
-          break;
-        }
+  getPeriodData = (period: string, data: any[]) => {
+    const _count = Number(period.substring(0, 1));
+    const _type = period.substring(1, 2);
+    const _maxVal = data[data.length - 1][0];
+    let _minVal, _dummy = [];
+    if (_type === 'h') {
+      _minVal = _maxVal - (3600 * 1000 * _count);
+    } else if (_type === 'd') {
+      _minVal = _maxVal - (24 * 3600 * 1000 * _count);
+    } else if (_type === 'w') {
+      _minVal = _maxVal - (7 * 24 * 3600 * 1000 * _count);
+    } else if (_type === 'm') {
+      _minVal = _maxVal - (30 * 24 * 3600 * 1000 * _count);
+    } else if (_type === 'y') {
+      _minVal = _maxVal - (365 * 24 * 3600 * 1000 * _count);
+    }
+    for (let i = 0; i < data.length; i++) {
+      if (data[i][0] >= _minVal) {
+        _dummy = data.slice(i, data.length - 1);
+        break;
       }
-      _dummy = json.slice(_minIndex, _lastIndex);
-    } else if (period === '1d') {
-      _dummy = json;
-    } else if (period === '1y') {
-      const _max = json[json.length - 1][0];
-      const _min = _max - (365 * 24 * 3600 * 1000);
-      let _minIndex = -1;
-      const _lastIndex = json.length - 1;
-      for (let index = 0; index < json.length; index++) {
-        const element = json[index];
-        if (element[0] >= _min) {
-          _minIndex = index;
-          break;
-        }
-      }
-      _dummy = json.slice(_minIndex, _lastIndex);
-    } else if (period === '2y') {
-      const _max = json[json.length - 1][0];
-      const _min = _max - (2 * 365 * 24 * 3600 * 1000);
-      let _minIndex = -1;
-      const _lastIndex = json.length - 1;
-      for (let index = 0; index < json.length; index++) {
-        const element = json[index];
-        if (element[0] >= _min) {
-          _minIndex = index;
-          break;
-        }
-      }
-      _dummy = json.slice(_minIndex, _lastIndex);
-    } else if (period === '3y') {
-      const _max = json[json.length - 1][0];
-      const _min = _max - (3 * 365 * 24 * 3600 * 1000);
-      let _minIndex = -1;
-      const _lastIndex = json.length - 1;
-      for (let index = 0; index < json.length; index++) {
-        const element = json[index];
-        if (element[0] >= _min) {
-          _minIndex = index;
-          break;
-        }
-      }
-      _dummy = json.slice(_minIndex, _lastIndex);
     }
     return _dummy;
   }
