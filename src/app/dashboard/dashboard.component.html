@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="btn-group">
+            <button type="button" (click)="changePeriod('1h')" class="btn btn-primary">1H</button>
+            <button type="button" (click)="changePeriod('1d')" class="btn btn-primary">1D</button>
+            <button type="button" (click)="changePeriod('1y')" class="btn btn-primary">1Y</button>
+            <button type="button" (click)="changePeriod('2y')" class="btn btn-primary">2Y</button>
+            <button type="button" (click)="changePeriod('3y')" class="btn btn-primary">3Y</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-lg-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div id="chart-container" appStockChart [highStockChartPeriod]="period"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
