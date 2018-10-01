@@ -26,7 +26,11 @@ export class TableContainerComponent implements OnInit {
   }
 
   submit = (form) => {
-    console.log(form.value);
+    this.dataSet1.push({
+      symbol: form.value.symbol.toUpperCase(),
+      close: Number(form.value.close),
+      date: form.value.date
+    });
   }
 
   sortData = (prop: string): void => {
