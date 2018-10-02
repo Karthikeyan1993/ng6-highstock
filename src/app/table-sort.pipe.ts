@@ -7,7 +7,7 @@ export class TableSortPipe implements PipeTransform {
     transform(value: any[], args?: any): any {
 
         if (value.length > 0 && args) {
-            const _order = args.order === 'asc' ? 1 : -1,
+            const _order = args.order === 'asc' ? -1 : 1,
                 _isArr = Array.isArray(value),
                 _type = typeof value[0],
                 _flag = _isArr && _type === 'object' ? true : _isArr && _type !== 'object' ? false : true;
@@ -21,7 +21,6 @@ export class TableSortPipe implements PipeTransform {
                     return a - b > 0 ? -1 * _order : 1 * _order;
                 }
             });
-
         }
         return value;
     }

@@ -10,9 +10,6 @@
             <div class="form-group">
               <input class="form-control" type="text" name="close" id="close" placeholder="close" ngModel>
             </div>
-            <div class="form-group">
-              <input class="form-control" type="text" name="date" id="date" placeholder="dd-mm-yyy" ngModel>
-            </div>
             <button class="btn btn-deafult" type="submit">Submit</button>
           </form>
         </div>
@@ -32,16 +29,12 @@
                 <th (click)="sortData('close')">CLOSE
                   <span [ngClass]="getChartClass('close')" class="sort-icon fa" aria-hidden="true"></span>
                 </th>
-                <th (click)="sortData('date')">DATE
-                  <span [ngClass]="getChartClass('date')" class="sort-icon fa" aria-hidden="true"></span>
-                </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let item of dataSet1 | tableSort : options">
                 <td>{{item.symbol}}</td>
                 <td>{{item.close}}</td>
-                <td>{{item.date}}</td>
               </tr>
             </tbody>
           </table>
